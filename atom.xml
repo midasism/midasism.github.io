@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://midasism.github.io</id>
     <title>Gridea</title>
-    <updated>2020-11-29T09:03:51.665Z</updated>
+    <updated>2020-11-29T09:26:50.573Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://midasism.github.io"/>
     <link rel="self" href="https://midasism.github.io/atom.xml"/>
@@ -61,12 +61,6 @@ npm config set cache &quot;node_cachel磁盘全路径&quot;
 </code></pre>
 <h3 id="vue-脚手架-vue-cli">vue 脚手架 vue-cli</h3>
 <pre><code>npm install vue-cli -g
-</code></pre>
-<h3 id="路由模块vue-router">路由模块vue-router</h3>
-<pre><code>npm install vue-router -g
-</code></pre>
-<h3 id="网络请求模块vue-resource">网络请求模块vue-resource</h3>
-<pre><code>npm install vue-resource -g
 </code></pre>
 <h1 id="三-创建vue项目">三. 创建vue项目</h1>
 <h2 id="新建项目存放目录在终端中进入该目录">新建项目存放目录，在终端中进入该目录</h2>
