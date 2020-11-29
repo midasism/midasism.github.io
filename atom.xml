@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://midasism.github.io</id>
     <title>Gridea</title>
-    <updated>2020-11-24T12:23:11.934Z</updated>
+    <updated>2020-11-29T08:46:41.778Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://midasism.github.io"/>
     <link rel="self" href="https://midasism.github.io/atom.xml"/>
@@ -10,6 +10,81 @@
     <logo>https://midasism.github.io/images/avatar.png</logo>
     <icon>https://midasism.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[Vue使用指南]]></title>
+        <id>https://midasism.github.io/post/vue-an-zhuang-yu-pei-zhi/</id>
+        <link href="https://midasism.github.io/post/vue-an-zhuang-yu-pei-zhi/">
+        </link>
+        <updated>2020-11-29T07:05:53.000Z</updated>
+        <content type="html"><![CDATA[<h1 id="一-安装并配置nodejs">一. 安装并配置node.js</h1>
+<h2 id="1-安装">1. 安装</h2>
+<h3 id="常规安装">常规安装</h3>
+<p>nodejs官网下载：https://nodejs.org/zh-cn/#home-downloadhead</p>
+<h3 id="scoop">scoop</h3>
+<pre><code>scoop install nodejs
+</code></pre>
+<ul>
+<li>测试安装：命令行中输入以下命令，如果输出相应版本号，则安装成功</li>
+</ul>
+<pre><code>node -v
+npm -v
+</code></pre>
+<h2 id="2-环境配置">2. 环境配置</h2>
+<h3 id="1配置npm安装的全局模块的存放目录和缓存cache的路径">（1）配置npm安装的全局模块的存放目录和缓存cache的路径</h3>
+<ol>
+<li>在nodejs安装的根路径下创建<mark>node_cache</mark>和<mark>node_global</mark>文件夹</li>
+<li>通过命令将自定义文件夹设置为nodejs全局模块存放目录和缓存cache路径</li>
+</ol>
+<pre><code>npm config set prefix &quot;node_global磁盘全路径&quot;
+npm config set cache &quot;node_cachel磁盘全路径&quot;
+</code></pre>
+<ol start="3">
+<li>添加环境变量</li>
+</ol>
+<ul>
+<li>修改用户变量Path：添加 node_global 文件夹磁盘全路径</li>
+<li>新建系统变量NODE_PATH：值为 node_global 文件夹中的 node_modules 文件夹的磁盘全路径</li>
+</ul>
+<h3 id="2npm换源">（2）npm换源</h3>
+<p>更换淘宝镜像</p>
+<pre><code>npm config set registry https://registry.npm.taobao.org
+</code></pre>
+<p>查看npm配置信息，包括prefix、cache路径和npm源等等</p>
+<pre><code>npm config list
+</code></pre>
+<h1 id="二-安装vue及相关模块">二. 安装vue及相关模块</h1>
+<h3 id="vue">vue</h3>
+<pre><code>npm install vue -g
+</code></pre>
+<h3 id="webpack">webpack</h3>
+<pre><code>npm install webpack -g
+</code></pre>
+<h3 id="vue-脚手架-vue-cli">vue 脚手架 vue-cli</h3>
+<pre><code>npm install vue-cli -g
+</code></pre>
+<h3 id="路由模块vue-router">路由模块vue-router</h3>
+<pre><code>npm install vue-router -g
+</code></pre>
+<h3 id="网络请求模块vue-resource">网络请求模块vue-resource</h3>
+<pre><code>npm install vue-resource -g
+</code></pre>
+<h1 id="三-创建vue项目">三. 创建vue项目</h1>
+<h2 id="新建项目存放目录在终端中进入该目录">新建项目存放目录，在终端中进入该目录</h2>
+<pre><code>cd 目录全路径
+</code></pre>
+<h2 id="创建vue项目并在终端中进入">创建vue项目，并在终端中进入</h2>
+<pre><code>vue init webpack 项目名
+cd 项目名
+</code></pre>
+<h2 id="安装项目依赖">安装项目依赖</h2>
+<h3 id="安装vue-路由模块-vue-router-和网络请求模块-vue-resource">安装vue 路由模块 vue-router 和网络请求模块 vue-resource</h3>
+<pre><code>npm install vue-router vue-resource --save
+</code></pre>
+<h2 id="启动项目">启动项目</h2>
+<pre><code>npm run dev
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://midasism.github.io/post/hello-gridea/</id>
