@@ -2,14 +2,179 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://midasism.github.io</id>
     <title>Gridea</title>
-    <updated>2020-11-29T09:26:50.573Z</updated>
+    <updated>2021-01-27T05:57:05.610Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://midasism.github.io"/>
     <link rel="self" href="https://midasism.github.io/atom.xml"/>
     <subtitle>温故而知新</subtitle>
     <logo>https://midasism.github.io/images/avatar.png</logo>
     <icon>https://midasism.github.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Gridea</rights>
+    <rights>All rights reserved 2021, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[实现一个极简IOC容器]]></title>
+        <id>https://midasism.github.io/post/shi-xian-yi-ge-ji-jian-ioc-rong-qi/</id>
+        <link href="https://midasism.github.io/post/shi-xian-yi-ge-ji-jian-ioc-rong-qi/">
+        </link>
+        <updated>2021-01-27T02:03:34.000Z</updated>
+        <content type="html"><![CDATA[<p>| 本文通过xml解析技术和反射技术手动实现Spring ioc容器通过xml配置文件初始化bean的过程，仅实现getBean方法</p>
+<h3 id="1-环境准备">1、环境准备</h3>
+<p>1、创建一个maven项目<br>
+2、pom.xml中引入<strong>dom4j</strong>、<strong>jaxen</strong>、lombok依赖</p>
+<p><strong>dom4j： xml解析组件</strong><br>
+<strong>jaxen：Xpath表达式解析器</strong><br>
+lombok：用于简化代码 比如setter、getter、构造器等等</p>
+<pre><code class="language-xml">&lt;!--dom4j--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;dom4j&lt;/groupId&gt;
+    &lt;artifactId&gt;dom4j&lt;/artifactId&gt;
+    &lt;version&gt;1.6.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- jaxen--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;jaxen&lt;/groupId&gt;
+    &lt;artifactId&gt;jaxen&lt;/artifactId&gt;
+    &lt;version&gt;1.1.1&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!-- lombok--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.projectlombok&lt;/groupId&gt;
+    &lt;artifactId&gt;lombok&lt;/artifactId&gt;
+    &lt;version&gt;RELEASE&lt;/version&gt;
+    &lt;scope&gt;compile&lt;/scope&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h3 id="2-实现过程">2、实现过程</h3>
+<p>1、实体类：Student<br>
+| 此处在setter方法中打印语句，便于观察最终结果来印证ioc容器注入属性的方式</p>
+<pre><code class="language-java">package com.ioc.entity;
+import lombok.*;
+@Getter
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Student {
+    private String name;
+    private String id;
+    private String sex;
+
+    public void setName(String name) {
+        System.out.println(&quot;IOC容器通过setter方法注入name属性：&quot; + name);
+        this.name = name;
+    }
+
+    public void setId(String id) {
+        System.out.println(&quot;IOC容器通过setter方法注入id属性：&quot; + id);
+        this.id = id;
+    }
+
+    public void setSex(String sex) {
+        System.out.println(&quot;IOC容器通过setter方法注入sex属性：&quot; + sex);
+        this.sex = sex;
+    }
+}
+</code></pre>
+<p>2、xml配置文件：applicationContext.xml<br>
+| 配置文件结构和spring保持一致</p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans&gt;
+    &lt;bean id=&quot;s1&quot; class=&quot;com.ioc.entity.Student&quot;&gt;
+        &lt;property name=&quot;name&quot; value=&quot;张三&quot;/&gt;
+        &lt;property name=&quot;id&quot; value=&quot;1928722031&quot;/&gt;
+        &lt;property name=&quot;sex&quot; value=&quot;男&quot;/&gt;
+    &lt;/bean&gt;
+&lt;/beans&gt;
+</code></pre>
+<p>3、ApplicationContext抽象类</p>
+<pre><code class="language-java">public interface ApplicationContext {
+    public Object getBean(String beanId);
+}
+</code></pre>
+<p>4、<strong>ClassPathXmlApplicationContext</strong>：Spring context实现类</p>
+<pre><code class="language-java">package com.ioc.context;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
+import java.io.File;
+import java.lang.reflect.Method;
+import java.net.URLDecoder;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ClassPathXmlApplicationContext implements ApplicationContext {
+    //使用Map集合
+    Map&lt;String, Object&gt; iocContainer = new HashMap&lt;&gt;();
+
+    public ClassPathXmlApplicationContext() {
+        try {
+            //获取配置文件的路径
+            String filepath = this.getClass().getResource(&quot;/applicationContext.xml&quot;).getPath();
+            //将路径用UTF-8解码，防止中文路径乱码
+            filepath = new URLDecoder().decode(filepath, &quot;UTF-8&quot;);
+            //用于解析XML文件
+            SAXReader reader = new SAXReader();
+            //将xml文件解析成对象 便于操作
+            Document document = reader.read(new File(filepath));
+            //使用Xpath表达式选择所有bean元素 每个bean元素对应一个对象
+            List&lt;Node&gt; beans = document.getRootElement().selectNodes(&quot;bean&quot;);
+            for (Node e : beans) {
+                //将bean节点强制转化为Element 很关键
+                Element element = (Element) e;
+                //获取bean标签的属性值：id class
+                String id = element.attributeValue(&quot;id&quot;);
+                String eClass = element.attributeValue(&quot;class&quot;);
+                //获取class属性代表的类的Class对象
+                Class c = Class.forName(eClass);
+                //利用反射 通过空构造器实例化bean
+                //注：Class对象.newInstance()已被废弃
+                Object o = c.getDeclaredConstructor().newInstance();
+                //使用Xpath表达式选择bean元素的所有属性值 property节点
+                //每个property节点代表对象的一个属性
+                List&lt;Node&gt; propertys = element.selectNodes(&quot;property&quot;);
+                for (Node p : propertys) {
+                    Element property = (Element) p;
+                    //获取property标签的属性值：name value
+                    String name = property.attributeValue(&quot;name&quot;);
+                    String value = property.attributeValue(&quot;value&quot;);
+                    //此处采用字符串拼接构建属性对应的setter方法名
+                    String setMethodName = &quot;set&quot; + name.substring(0, 1).toUpperCase() + name.substring(1);
+                    //通过方法名和Class对象得到对应的Method类 便于后续反射调用
+                    Method method = c.getMethod(setMethodName, String.class);
+                    //通过反射 利用属性的setter方法对属性赋值
+                    method.invoke(o, value);
+                }
+                //将创建好的bean放入IOC容器（Map）中
+                iocContainer.put(id, o);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(&quot;ioc容器已初始化&quot;);
+    }
+
+    @Override
+    public Object getBean(String beanId) {
+        return iocContainer.get(beanId);
+    }
+}
+</code></pre>
+<p>5、测试类：Application</p>
+<pre><code class="language-java">package com.ioc.context;
+import com.ioc.entity.Student;
+public class Application {
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext();
+        Student s1 = (Student) context.getBean(&quot;s1&quot;);
+        System.out.println(s1);
+    }
+}
+</code></pre>
+<p>运行结果：<br>
+<img src="https://cdn.jsdelivr.net/gh/midasism/cloud-img@main/img/Gridea-ioc-01.png" alt="" loading="lazy"></p>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Vue使用指南]]></title>
         <id>https://midasism.github.io/post/vue-an-zhuang-yu-pei-zhi/</id>
