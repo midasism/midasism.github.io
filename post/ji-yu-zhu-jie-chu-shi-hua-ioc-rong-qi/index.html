@@ -4,52 +4,37 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Vue使用指南 - Gridea</title>
+<title>基于注解配置Bean - Gridea</title>
 <link rel="shortcut icon" href="https://midasism.github.io/favicon.ico">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.2.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css">
 <link rel="stylesheet" href="https://midasism.github.io/media/css/tailwind.css">
 <link rel="stylesheet" href="https://midasism.github.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="Vue使用指南 - Gridea - Atom Feed" href="https://midasism.github.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="基于注解配置Bean - Gridea - Atom Feed" href="https://midasism.github.io/atom.xml">
 
     
 
-  <meta name="description" content="一. 安装并配置node.js
-1. 安装
-常规安装
-nodejs官网下载：https://nodejs.org/zh-cn/#home-downloadhead
-scoop
-    scoop install nodejs
-
-
-测试安装：..." />
-  <meta property="og:title" content="Vue使用指南 - Gridea">
-  <meta property="og:description" content="一. 安装并配置node.js
-1. 安装
-常规安装
-nodejs官网下载：https://nodejs.org/zh-cn/#home-downloadhead
-scoop
-    scoop install nodejs
-
-
-测试安装：..." />
+  <meta name="description" content="一、环境准备
+Spring配置文件 applicationContext.xml
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;beans xmln..." />
+  <meta property="og:title" content="基于注解配置Bean - Gridea">
+  <meta property="og:description" content="一、环境准备
+Spring配置文件 applicationContext.xml
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;beans xmln..." />
   <meta property="og:type" content="articles">
-  <meta property="og:url" content="https://midasism.github.io/post/vue-an-zhuang-yu-pei-zhi/" />
+  <meta property="og:url" content="https://midasism.github.io/post/ji-yu-zhu-jie-chu-shi-hua-ioc-rong-qi/" />
   <meta property="og:image" content="https://midasism.github.io/images/avatar.png">
   <meta property="og:image:height" content="630">
   <meta property="og:image:width" content="1200">
-  <meta name="twitter:title" content="Vue使用指南 - Gridea">
-  <meta name="twitter:description" content="一. 安装并配置node.js
-1. 安装
-常规安装
-nodejs官网下载：https://nodejs.org/zh-cn/#home-downloadhead
-scoop
-    scoop install nodejs
-
-
-测试安装：...">
+  <meta name="twitter:title" content="基于注解配置Bean - Gridea">
+  <meta name="twitter:description" content="一、环境准备
+Spring配置文件 applicationContext.xml
+&amp;lt;?xml version=&amp;quot;1.0&amp;quot; encoding=&amp;quot;UTF-8&amp;quot;?&amp;gt;
+&amp;lt;beans xmln...">
   <meta name="twitter:card" content="summary_large_image">
-  <link rel="canonical" href="https://midasism.github.io/post/vue-an-zhuang-yu-pei-zhi/">
+  <link rel="canonical" href="https://midasism.github.io/post/ji-yu-zhu-jie-chu-shi-hua-ioc-rong-qi/">
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css">
@@ -69,75 +54,68 @@ scoop
     <div class="max-w-4xl w-full mx-auto">
       <div class="shadow-box bg-white dark:bg-gray-600 rounded-lg pt-32 md:pt-64 px-4 md:px-8 pb-8 animated fadeIn mb-8">
         <h1 class="text-5xl font-semibold leading-normal pb-8 mb-8 border-b-8 border-gray-700">
-          Vue使用指南
+          基于注解配置Bean
         </h1>
         
         <div class="mb-8 flex flex-wrap">
-          <div class="text-gray-400 text-sm mr-4">2020-11-29 · 2 min read</div>
+          <div class="text-gray-400 text-sm mr-4">2021-01-27 · 2 min read</div>
+          
+            <a href="https://midasism.github.io/tag/P5eyWDGee/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Spring
+            </a>
+          
+            <a href="https://midasism.github.io/tag/dT7Z0q2LF/" class="text-gray-700 text-sm border-b-2 border-dotted border-gray-200 hover:border-gray-600 transition-all duration-100 inline-flex mr-2">
+              <i class="ri-hashtag"></i>
+              Java
+            </a>
           
         </div>
         <div class="markdown mb-8" v-pre>
-          <h1 id="一-安装并配置nodejs">一. 安装并配置node.js</h1>
-<h2 id="1-安装">1. 安装</h2>
-<h3 id="常规安装">常规安装</h3>
-<p>nodejs官网下载：https://nodejs.org/zh-cn/#home-downloadhead</p>
-<h3 id="scoop">scoop</h3>
-<pre><code>    scoop install nodejs
+          <h3 id="一-环境准备">一、环境准备</h3>
+<p>Spring配置文件 <strong>applicationContext.xml</strong></p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:context=&quot;http://www.springframework.org/schema/c&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+&lt;!-- 开启自动扫描 --&gt;
+    &lt;context:component-scan base-package=&quot;待扫描的包&quot;/&gt;
+
+&lt;/beans&gt;
 </code></pre>
-<ul>
-<li>测试安装：命令行中输入以下命令，如果输出相应版本号，则安装成功</li>
-</ul>
-<pre><code>node -v
-npm -v
-</code></pre>
-<h2 id="2-环境配置">2. 环境配置</h2>
-<h3 id="1配置npm安装的全局模块的存放目录和缓存cache的路径">（1）配置npm安装的全局模块的存放目录和缓存cache的路径</h3>
+<h3 id="二-相关注解">二、相关注解</h3>
 <ol>
-<li>在nodejs安装的根路径下创建<mark>node_cache</mark>和<mark>node_global</mark>文件夹</li>
-<li>通过命令将自定义文件夹设置为nodejs全局模块存放目录和缓存cache路径</li>
+<li>@Repository：标记数据访问层（dao）</li>
+<li>@Controller：标记控制器层（controller）</li>
+<li>@Service：标记业务层（service）</li>
+<li>@Component：标记通用组件</li>
 </ol>
-<pre><code>npm config set prefix &quot;node_global磁盘全路径&quot;
-npm config set cache &quot;node_cachel磁盘全路径&quot;
-</code></pre>
-<ol start="3">
-<li>添加环境变量</li>
-</ol>
+<h4 id="要点">要点</h4>
 <ul>
-<li>修改用户变量Path：添加 node_global 文件夹磁盘全路径</li>
-<li>新建系统变量NODE_PATH：值为 node_global 文件夹中的 node_modules 文件夹的磁盘全路径</li>
+<li>如果使用默认注解，则类对应的bean的id为开头字母小写的类名</li>
+<li>如果想要自定义bean的id，则对注解的value属性赋值即可</li>
 </ul>
-<h3 id="2npm换源">（2）npm换源</h3>
-<p>更换淘宝镜像</p>
-<pre><code>npm config set registry https://registry.npm.taobao.org
+<pre><code class="language-java">//无参 bean id为student
+@Controller()
+public class Student {
+    private String name;
+    private String id;
+}
+
+//bean id为 s1
+//@Controller(&quot;s1&quot;)
+@Controller(value = &quot;s1&quot;)
+public class Student {
+    private String name;
+    private String id;
+}
 </code></pre>
-<p>查看npm配置信息，包括prefix、cache路径和npm源等等</p>
-<pre><code>npm config list
-</code></pre>
-<h1 id="二-安装vue及相关模块">二. 安装vue及相关模块</h1>
-<h3 id="vue">vue</h3>
-<pre><code>npm install vue -g
-</code></pre>
-<h3 id="webpack">webpack</h3>
-<pre><code>npm install webpack -g
-</code></pre>
-<h3 id="vue-脚手架-vue-cli">vue 脚手架 vue-cli</h3>
-<pre><code>npm install vue-cli -g
-</code></pre>
-<h1 id="三-创建vue项目">三. 创建vue项目</h1>
-<h2 id="新建项目存放目录在终端中进入该目录">新建项目存放目录，在终端中进入该目录</h2>
-<pre><code>cd 目录全路径
-</code></pre>
-<h2 id="创建vue项目并在终端中进入">创建vue项目，并在终端中进入</h2>
-<pre><code>vue init webpack 项目名
-cd 项目名
-</code></pre>
-<h2 id="安装项目依赖">安装项目依赖</h2>
-<h3 id="安装vue-路由模块-vue-router-和网络请求模块-vue-resource">安装vue 路由模块 vue-router 和网络请求模块 vue-resource</h3>
-<pre><code>npm install vue-router vue-resource --save
-</code></pre>
-<h2 id="启动项目">启动项目</h2>
-<pre><code>npm run dev
-</code></pre>
+<ul>
+<li>在类上使用以上四个注解后，Spring会自动创建相应的BeanDefinition对象，并注册到ApplicationContext中</li>
+<li>可以创建自定义注解，然后在注解上标注@Component，该自定义注解就具有了@Component的功能</li>
+<li>以上4个注解功能相同，只是作用位置不同，增强可读性</li>
+</ul>
 
         </div>
         <!-- Share to Twitter, Weibo, Telegram -->
@@ -179,40 +157,18 @@ cd 项目名
       </div>
       <div class="post-toc-container">
         <ul class="markdownIt-TOC">
-<li><a href="#%E4%B8%80-%E5%AE%89%E8%A3%85%E5%B9%B6%E9%85%8D%E7%BD%AEnodejs">一. 安装并配置node.js</a>
+<li>
 <ul>
-<li><a href="#1-%E5%AE%89%E8%A3%85">1. 安装</a>
+<li>
 <ul>
-<li><a href="#%E5%B8%B8%E8%A7%84%E5%AE%89%E8%A3%85">常规安装</a></li>
-<li><a href="#scoop">scoop</a></li>
-</ul>
-</li>
-<li><a href="#2-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">2. 环境配置</a>
+<li><a href="#%E4%B8%80-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87">一、环境准备</a></li>
+<li><a href="#%E4%BA%8C-%E7%9B%B8%E5%85%B3%E6%B3%A8%E8%A7%A3">二、相关注解</a>
 <ul>
-<li><a href="#1%E9%85%8D%E7%BD%AEnpm%E5%AE%89%E8%A3%85%E7%9A%84%E5%85%A8%E5%B1%80%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AD%98%E6%94%BE%E7%9B%AE%E5%BD%95%E5%92%8C%E7%BC%93%E5%AD%98cache%E7%9A%84%E8%B7%AF%E5%BE%84">（1）配置npm安装的全局模块的存放目录和缓存cache的路径</a></li>
-<li><a href="#2npm%E6%8D%A2%E6%BA%90">（2）npm换源</a></li>
+<li><a href="#%E8%A6%81%E7%82%B9">要点</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#%E4%BA%8C-%E5%AE%89%E8%A3%85vue%E5%8F%8A%E7%9B%B8%E5%85%B3%E6%A8%A1%E5%9D%97">二. 安装vue及相关模块</a><br>
-*
-<ul>
-<li><a href="#vue">vue</a></li>
-<li><a href="#webpack">webpack</a></li>
-<li><a href="#vue-%E8%84%9A%E6%89%8B%E6%9E%B6-vue-cli">vue 脚手架 vue-cli</a></li>
-</ul>
-</li>
-<li><a href="#%E4%B8%89-%E5%88%9B%E5%BB%BAvue%E9%A1%B9%E7%9B%AE">三. 创建vue项目</a>
-<ul>
-<li><a href="#%E6%96%B0%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%AD%98%E6%94%BE%E7%9B%AE%E5%BD%95%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%B8%AD%E8%BF%9B%E5%85%A5%E8%AF%A5%E7%9B%AE%E5%BD%95">新建项目存放目录，在终端中进入该目录</a></li>
-<li><a href="#%E5%88%9B%E5%BB%BAvue%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%9C%A8%E7%BB%88%E7%AB%AF%E4%B8%AD%E8%BF%9B%E5%85%A5">创建vue项目，并在终端中进入</a></li>
-<li><a href="#%E5%AE%89%E8%A3%85%E9%A1%B9%E7%9B%AE%E4%BE%9D%E8%B5%96">安装项目依赖</a>
-<ul>
-<li><a href="#%E5%AE%89%E8%A3%85vue-%E8%B7%AF%E7%94%B1%E6%A8%A1%E5%9D%97-vue-router-%E5%92%8C%E7%BD%91%E7%BB%9C%E8%AF%B7%E6%B1%82%E6%A8%A1%E5%9D%97-vue-resource">安装vue 路由模块 vue-router 和网络请求模块 vue-resource</a></li>
-</ul>
-</li>
-<li><a href="#%E5%90%AF%E5%8A%A8%E9%A1%B9%E7%9B%AE">启动项目</a></li>
 </ul>
 </li>
 </ul>

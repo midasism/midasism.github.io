@@ -2,18 +2,270 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://midasism.github.io</id>
     <title>Gridea</title>
-    <updated>2021-01-27T06:01:52.186Z</updated>
+    <updated>2021-01-30T08:53:09.979Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://midasism.github.io"/>
     <link rel="self" href="https://midasism.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>凡事到最后必将皆大欢喜，如果没有，那就是还没到最后</subtitle>
     <logo>https://midasism.github.io/images/avatar.png</logo>
     <icon>https://midasism.github.io/favicon.ico</icon>
     <rights>All rights reserved 2021, Gridea</rights>
     <entry>
+        <title type="html"><![CDATA[Spring Test与JUnit4整合]]></title>
+        <id>https://midasism.github.io/post/dai-wan-cheng-spring-yu-junit4-zheng-he/</id>
+        <link href="https://midasism.github.io/post/dai-wan-cheng-spring-yu-junit4-zheng-he/">
+        </link>
+        <updated>2021-01-29T05:46:01.000Z</updated>
+        <content type="html"><![CDATA[<ul>
+<li>Spring Test是Spring中用于测试的模块</li>
+<li>Spring Test对JUnit单元测试框架有良好的整合</li>
+<li>通过Spring Test可以在JUnit单元测试时自动初始化IOC容器</li>
+</ul>
+<h2 id="1-环境准备">1、环境准备</h2>
+<h3 id="11-相关依赖">1.1、相关依赖</h3>
+<pre><code class="language-xml">&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+    &lt;version&gt;5.2.12.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;!--        Spring Test--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
+    &lt;version&gt;5.2.9.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+
+&lt;!--        Junit--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;junit&lt;/groupId&gt;
+    &lt;artifactId&gt;junit&lt;/artifactId&gt;
+    &lt;version&gt;4.12&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre>
+<h3 id="12-相关注解">1.2、相关注解</h3>
+<ol>
+<li>@RunWith(SpringJUnit4ClassRunner.class)：使Spring接管JUnit的控制权，在测试用例执行前自动初始化IOC容器</li>
+<li>@ContextConfiguration(locations = {})：说明要加载的xml配置文件的位置（可加载多个配置文件）</li>
+</ol>
+<h2 id="2-实战">2、实战</h2>
+<pre><code class="language-java">//Test.java
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import spring.service.StudentService;
+import javax.annotation.Resource;
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = {&quot;classpath:applicationContext.xml&quot;})
+public class Test {
+    @Resource
+    private StudentService service;
+
+    @org.junit.Test
+    public void testService() {
+        service.test();
+    }
+}
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java Config 配置Bean]]></title>
+        <id>https://midasism.github.io/post/dai-wan-cheng-java-config/</id>
+        <link href="https://midasism.github.io/post/dai-wan-cheng-java-config/">
+        </link>
+        <updated>2021-01-28T10:36:00.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-概述">1、概述</h2>
+<h3 id="11-由来">1.1、由来</h3>
+<p>Spring IOC中有个重要的概念——Bean，Bean即对象，我们通过配置Bean让IOC容器管理Bean，而最常用的方式就是通过XML文件来配置，但通过XML文件来配置比较繁琐，数量较多的时候会使项目变得复杂，而且使用XML配置没有编译时的类型安全检查</p>
+<p>所以在Spring4以后，Spring推荐使用Java Config代替XML文件来配置Bean</p>
+<p>Java Config就是使用注解，通过java类来描述Bean配置的组件</p>
+<p>Java Config结合了XML的解耦和JAVA编译时检查的优点，可以看成是一个XML文件，只不过是由Java编写的</p>
+<h3 id="12-优缺点">1.2、优缺点</h3>
+<h4 id="121-优点">1.2.1、优点</h4>
+<ol>
+<li>摒弃xml配置文件，使用Java类管理对象和依赖</li>
+<li>注解配置相对分散，使用Java Config可以集中管理配置</li>
+<li>可以在编译时进行依赖检查，不容易出错</li>
+</ol>
+<h4 id="122-缺点">1.2.2、缺点</h4>
+<p>与xml配置文件相比，可维护性差</p>
+<h2 id="2-相关注解">2、相关注解</h2>
+<ol>
+<li>@Configuration：描述类，用于标记Java Config配置类</li>
+<li>@Bean：描述方法，IOC容器会管理被标记方法返回的对象（bean id默认为方法名）</li>
+<li>@ComponentScan：描述类，扫描指定类中的注解配置（作用与xml配置中的<a href="context:component-scan">context:component-scan</a>标签相同）</li>
+<li>@ImportResource：描述类，加载静态文件，可使用@Value注解获取</li>
+</ol>
+<p>| 由于是Java类的形式，所以同样可以使用各种类注解，比如@Primary</p>
+<h2 id="3-使用步骤">3、使用步骤</h2>
+<h3 id="31-创建配置类">3.1、创建配置类</h3>
+<ul>
+<li>需要使用 <strong>@Configuration</strong> 注解标注配置类</li>
+</ul>
+<pre><code class="language-java">//JavaConfig.java
+package spring.config;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class JavaConfig {
+
+}
+</code></pre>
+<h3 id="32-创建bean">3.2、创建bean</h3>
+<p>StudentController类</p>
+<pre><code class="language-java">//StudentController.java
+package spring.controller;
+import lombok.Data;
+import spring.service.StudentService;
+
+@Data
+public class StudentController {
+    private StudentService service;
+
+    public StudentController() {
+        System.out.println(&quot;StudentController创建&quot;);
+    }
+}
+</code></pre>
+<p>StudentService类</p>
+<pre><code class="language-java">//StudentService.java
+package spring.service;
+
+public class StudentService {
+    public StudentService() {
+        System.out.println(&quot;StudentService创建&quot;);
+    }
+}
+
+</code></pre>
+<h4 id="创建bean">创建bean</h4>
+<ul>
+<li>使用@Bean注解标注方法，IOC容器管理方法返回的对象（与XML配置中的<bean>标签作用相同）</li>
+<li>bean id为方法名</li>
+</ul>
+<pre><code class="language-java">//JavaConfig.java
+package spring;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import spring.controller.StudentController;
+import spring.service.StudentService;
+
+@Configuration
+public class JavaConfig {
+    //此处创建service、controller两个bean
+    @Bean
+    public StudentService service() {
+        StudentService service = new StudentService();
+        return service;
+    }
+
+    @Bean
+    public StudentController controller() {
+        StudentController controller = new StudentController();
+        return controller;
+    }
+}
+</code></pre>
+<h4 id="测试">测试</h4>
+<p>测试类</p>
+<pre><code class="language-java">//ApplicationContext.java
+package spring;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import spring.config.JavaConfig;
+import spring.controller.StudentController;
+import java.util.Arrays;
+
+public class ApplicationContext {
+    public static void main(String[] args) {
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(JavaConfig.class);
+        String[] beanDefinitionNames = context.getBeanDefinitionNames();
+        Arrays.stream(beanDefinitionNames).forEach(e -&gt; System.out.println(e));
+    }
+}
+</code></pre>
+<p>测试结果<br>
+| 打印IOC容器中所有的bean<br>
+<img src="https://cdn.jsdelivr.net/gh/midasism/cloud-img@main/img/JavaConfig.png" alt="" loading="lazy"><br>
+观察到两个bean创建成功</p>
+<h3 id="33-设置对象依赖">3.3、设置对象依赖</h3>
+<ul>
+<li>设置对象依赖时，将依赖的对象通过方法的属性传入，并在方法中通过构造方法、setter等方式注入依赖</li>
+<li><strong>在查找属性对应的bean时，先按属性名查找，找不到再按属性类型查找</strong></li>
+</ul>
+<pre><code class="language-java">//JavaConfig.java
+......
+    @Bean
+    public StudentController controller(StudentService service) {
+        StudentController controller = new StudentController();
+        controller.setService(service);
+        return controller;
+    }
+</code></pre>
+<h4 id="测试-2">测试</h4>
+<p>测试结果<br>
+| 打印controller<br>
+<img src="https://cdn.jsdelivr.net/gh/midasism/cloud-img@main/img/JavaConfig-02.png" alt="" loading="lazy"><br>
+观察到属性注入成功</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[基于注解配置Bean]]></title>
+        <id>https://midasism.github.io/post/ji-yu-zhu-jie-chu-shi-hua-ioc-rong-qi/</id>
+        <link href="https://midasism.github.io/post/ji-yu-zhu-jie-chu-shi-hua-ioc-rong-qi/">
+        </link>
+        <updated>2021-01-27T08:52:49.000Z</updated>
+        <content type="html"><![CDATA[<h3 id="一-环境准备">一、环境准备</h3>
+<p>Spring配置文件 <strong>applicationContext.xml</strong></p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:context=&quot;http://www.springframework.org/schema/c&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+&lt;!-- 开启自动扫描 --&gt;
+    &lt;context:component-scan base-package=&quot;待扫描的包&quot;/&gt;
+
+&lt;/beans&gt;
+</code></pre>
+<h3 id="二-相关注解">二、相关注解</h3>
+<ol>
+<li>@Repository：标记数据访问层（dao）</li>
+<li>@Controller：标记控制器层（controller）</li>
+<li>@Service：标记业务层（service）</li>
+<li>@Component：标记通用组件</li>
+</ol>
+<h4 id="要点">要点</h4>
+<ul>
+<li>如果使用默认注解，则类对应的bean的id为开头字母小写的类名</li>
+<li>如果想要自定义bean的id，则对注解的value属性赋值即可</li>
+</ul>
+<pre><code class="language-java">//无参 bean id为student
+@Controller()
+public class Student {
+    private String name;
+    private String id;
+}
+
+//bean id为 s1
+//@Controller(&quot;s1&quot;)
+@Controller(value = &quot;s1&quot;)
+public class Student {
+    private String name;
+    private String id;
+}
+</code></pre>
+<ul>
+<li>在类上使用以上四个注解后，Spring会自动创建相应的BeanDefinition对象，并注册到ApplicationContext中</li>
+<li>可以创建自定义注解，然后在注解上标注@Component，该自定义注解就具有了@Component的功能</li>
+<li>以上4个注解功能相同，只是作用位置不同，增强可读性</li>
+</ul>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[实现一个极简IOC容器]]></title>
-        <id>https://midasism.github.io/post/shi-xian-yi-ge-ji-jian-ioc-rong-qi/</id>
-        <link href="https://midasism.github.io/post/shi-xian-yi-ge-ji-jian-ioc-rong-qi/">
+        <id>https://midasism.github.io/post/ioc-demo/</id>
+        <link href="https://midasism.github.io/post/ioc-demo/">
         </link>
         <updated>2021-01-27T02:03:34.000Z</updated>
         <content type="html"><![CDATA[<p>| 本文通过xml解析技术和反射技术手动实现Spring ioc容器通过xml配置文件初始化bean的过程，仅实现getBean方法</p>
