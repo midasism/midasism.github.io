@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://midasism.github.io</id>
     <title>Gridea</title>
-    <updated>2021-02-01T08:19:14.366Z</updated>
+    <updated>2021-02-01T08:37:15.526Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://midasism.github.io"/>
     <link rel="self" href="https://midasism.github.io/atom.xml"/>
@@ -390,8 +390,8 @@ public class App {
     </entry>
     <entry>
         <title type="html"><![CDATA[XML文件 配置AOP]]></title>
-        <id>https://midasism.github.io/post/dai-wan-cheng-aop-pei-zhi/</id>
-        <link href="https://midasism.github.io/post/dai-wan-cheng-aop-pei-zhi/">
+        <id>https://midasism.github.io/post/aop-xml/</id>
+        <link href="https://midasism.github.io/post/aop-xml/">
         </link>
         <updated>2021-01-30T08:34:29.000Z</updated>
         <content type="html"><![CDATA[<h2 id="1-使用步骤">1、使用步骤</h2>
