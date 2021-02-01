@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gridea | Gridea</title>
+<title>Java Config 配置IOC容器 | Gridea</title>
 <meta name="description" content="凡事到最后必将皆大欢喜，如果没有，那就是还没到最后" />
 <link rel="shortcut icon" href="https://midasism.github.io/favicon.ico">
 <link rel="stylesheet" href="https://midasism.github.io/styles/main.css">
@@ -14,11 +14,15 @@
 <script src="https://midasism.github.io/media/js/view-image.min.js"></script>
 <script src="https://midasism.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://midasism.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="1、概述
+1.1、由来
+Spring IOC中有个重要的概念——Bean，Bean即对象，我们通过配置Bean让IOC容器管理Bean，而最常用的方式就是通过XML文件来配置，但通过XML文件来配置比较繁琐，数量较多的时候会使项目变得复杂，..." />
+    <meta name="keywords" content="Spring,Java" />
+    <script src="https://midasism.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://midasism.github.io/media/js/prism.min.js"></script>
   </head>
   <body>
-    <!-- start: #wrapper -->
-    <div class="wrapper">
-      
             <header id="header" class="grid-container">
         <!-- start: .menu-wrapper -->
         <div class="menu-mobile"> 
@@ -85,45 +89,226 @@
         </div>
       </div>
 
-      <main id="home" class="main fullcover no-sidebar content">
-        <div class="grid-container module-wrapper enable-masonry aos-init aos-animate" data-aos="fade-up">
-        <div class="epcl-page-wrapper">
-          <div class="left-content grid-70 np-mobile widget_epcl_related_articles">
-                
-            <!-- start: .articles -->
-            <div class="main-article post">
-  <h2 class="year"># Gridea</h2>
-    
-      <article class="item default grid-33 tablet-grid-50 np-mobile">
-        <a href="https://midasism.github.io/post/hello-gridea/" class="thumb hover-effect">
-          <span class="fullimage cover" style="display: block;background-image: url('https://midasism.github.io/post-images/hello-gridea.png');"></span>
-        </a>
-        <div class="info gradient-effect">
-          <time datetime="2018-12-12">2018-12-12</time>
-          <h4 class="title usmall">
-            <a href="https://midasism.github.io/post/hello-gridea/">Hello Gridea</a>
-          </h4>
-        </div>
-      </article>
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
 
-    
-    <div class="clear"></div>
-</div>
-            <!-- end: .articles -->
-            
-                        <div class="epcl-pagination section">
-              <div class="nav">
-                
-                
-              </div>
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-01-28"><i class="fa fa-calendar"></i><span class="lately">4 天前</span></time>
+              
+              <a href="https://midasism.github.io/post/ioc-JavaConfig/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/ioc-JavaConfig/"> </span>
+              </a>
+              <span id="/ioc-JavaConfig/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
             </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://midasism.github.io/tag/P5eyWDGee/" class="ctag ctag-0 ctag-P5eyWDGee" aria-label="">Spring</a>
+                    
+                      <a href="https://midasism.github.io/tag/dT7Z0q2LF/" class="ctag ctag-1 ctag-dT7Z0q2LF" aria-label="">Java</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">Java Config 配置IOC容器</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h2 id="1-概述">1、概述</h2>
+<h3 id="11-由来">1.1、由来</h3>
+<p>Spring IOC中有个重要的概念——Bean，Bean即对象，我们通过配置Bean让IOC容器管理Bean，而最常用的方式就是通过XML文件来配置，但通过XML文件来配置比较繁琐，数量较多的时候会使项目变得复杂，而且使用XML配置没有编译时的类型安全检查</p>
+<p>所以在Spring4以后，Spring推荐使用Java Config代替XML文件来配置Bean</p>
+<p>Java Config就是使用注解，通过java类来描述Bean配置的组件</p>
+<p>Java Config结合了XML的解耦和JAVA编译时检查的优点，可以看成是一个XML文件，只不过是由Java编写的</p>
+<h3 id="12-优缺点">1.2、优缺点</h3>
+<h4 id="121-优点">1.2.1、优点</h4>
+<ol>
+<li>摒弃xml配置文件，使用Java类管理对象和依赖</li>
+<li>注解配置相对分散，使用Java Config可以集中管理配置</li>
+<li>可以在编译时进行依赖检查，不容易出错</li>
+</ol>
+<h4 id="122-缺点">1.2.2、缺点</h4>
+<p>与xml配置文件相比，可维护性差</p>
+<p></br></br></p>
+<h2 id="2-相关注解">2、相关注解</h2>
+<ol>
+<li>@Configuration：描述类，用于标记Java Config配置类</li>
+<li>@Bean：描述方法，IOC容器会管理被标记方法返回的对象（bean id默认为方法名）</li>
+<li>@ComponentScan：描述类，扫描指定类中的注解配置（作用与xml配置中的<a href="context:component-scan">context:component-scan</a>标签相同）</li>
+<li>@ImportResource：描述类，加载静态文件，可使用@Value注解获取</li>
+</ol>
+<p>| 由于是Java类的形式，所以同样可以使用各种类注解，比如@Primary</p>
+<p></br></br></p>
+<h2 id="3-使用步骤">3、使用步骤</h2>
+<h3 id="31-创建配置类">3.1、创建配置类</h3>
+<ul>
+<li>需要使用 <strong>@Configuration</strong> 注解标注配置类</li>
+</ul>
+<pre><code class="language-java">//JavaConfig.java
+package spring.config;
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class JavaConfig {
+
+}
+</code></pre>
+<h3 id="32-创建bean">3.2、创建bean</h3>
+<p>StudentController类</p>
+<pre><code class="language-java">//StudentController.java
+package spring.controller;
+import lombok.Data;
+import spring.service.StudentService;
+
+@Data
+public class StudentController {
+    private StudentService service;
+
+    public StudentController() {
+        System.out.println(&quot;StudentController创建&quot;);
+    }
+}
+</code></pre>
+<p>StudentService类</p>
+<pre><code class="language-java">//StudentService.java
+package spring.service;
+
+public class StudentService {
+    public StudentService() {
+        System.out.println(&quot;StudentService创建&quot;);
+    }
+}
+
+</code></pre>
+<h4 id="创建bean">创建bean</h4>
+<ul>
+<li>使用@Bean注解标注方法，IOC容器管理方法返回的对象（与XML配置中的<bean>标签作用相同）</li>
+<li>bean id为方法名</li>
+</ul>
+<pre><code class="language-java">//JavaConfig.java
+package spring;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import spring.controller.StudentController;
+import spring.service.StudentService;
+
+@Configuration
+public class JavaConfig {
+    //此处创建service、controller两个bean
+    @Bean
+    public StudentService service() {
+        StudentService service = new StudentService();
+        return service;
+    }
+
+    @Bean
+    public StudentController controller() {
+        StudentController controller = new StudentController();
+        return controller;
+    }
+}
+</code></pre>
+<h4 id="测试">测试</h4>
+<p>测试类</p>
+<pre><code class="language-java">//ApplicationContext.java
+package spring;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
+import spring.config.JavaConfig;
+import spring.controller.StudentController;
+import java.util.Arrays;
+
+public class ApplicationContext {
+    public static void main(String[] args) {
+        AbstractApplicationContext context = new AnnotationConfigApplicationContext(JavaConfig.class);
+        String[] beanDefinitionNames = context.getBeanDefinitionNames();
+        Arrays.stream(beanDefinitionNames).forEach(e -&gt; System.out.println(e));
+    }
+}
+</code></pre>
+<p>测试结果<br>
+| 打印IOC容器中所有的bean<br>
+<img src="https://cdn.jsdelivr.net/gh/midasism/cloud-img@main/img/JavaConfig.png" alt="" loading="lazy"><br>
+观察到两个bean创建成功</p>
+<h3 id="33-设置对象依赖">3.3、设置对象依赖</h3>
+<ul>
+<li>设置对象依赖时，将依赖的对象通过方法的属性传入，并在方法中通过构造方法、setter等方式注入依赖</li>
+<li><strong>在查找属性对应的bean时，先按属性名查找，找不到再按属性类型查找</strong></li>
+</ul>
+<pre><code class="language-java">//JavaConfig.java
+......
+    @Bean
+    public StudentController controller(StudentService service) {
+        StudentController controller = new StudentController();
+        controller.setService(service);
+        return controller;
+    }
+</code></pre>
+<h4 id="测试-2">测试</h4>
+<p>测试结果<br>
+| 打印controller<br>
+<img src="https://cdn.jsdelivr.net/gh/midasism/cloud-img@main/img/JavaConfig-02.png" alt="" loading="lazy"><br>
+观察到属性注入成功</p>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://midasism.github.io/post-images/springTest-JUnit4.png');"></div>
+                 <a href="https://midasism.github.io/post/springTest-JUnit4/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-01-29">2021-01-29</time>
+                  <h4 class="title white no-margin">Spring Test与JUnit4整合</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://midasism.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://midasism.github.io/media/images/P5eyWDGee.jpg');"></div>
+                 <a href="https://midasism.github.io/post/ioc-xml/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-01-27">2021-01-27</time>
+                  <h4 class="title white no-margin">基于注解配置Bean</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://midasism.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
             
+              <div id="comments" class="bg-white hosted ">
+                <p>请到客户端“主题--自定义配置--valine”中填入ID和KEY</p>
+              </div>
+              <div class="clear"></div>
+            
+
+            </div>
           </div>
-          </div>
-        </div>
       </main>
 
-        <footer id="footer" class="grid-container">
+          <footer id="footer" class="grid-container">
         <div class="widgets row gradient-effect">
             <div class="default-sidebar border-effect">
               <div class="grid-33 tablet-grid-50 mobile-grid-100">
@@ -253,6 +438,9 @@
     <div class="clear"></div>
 
         
+
+      
+    <script src="https://midasism.github.io/media/js/functions-post.js"></script>
 
     </div>
     <!-- end: #wrapper -->

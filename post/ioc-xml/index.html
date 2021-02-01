@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gridea | Gridea</title>
+<title>基于注解配置Bean | Gridea</title>
 <meta name="description" content="凡事到最后必将皆大欢喜，如果没有，那就是还没到最后" />
 <link rel="shortcut icon" href="https://midasism.github.io/favicon.ico">
 <link rel="stylesheet" href="https://midasism.github.io/styles/main.css">
@@ -14,11 +14,16 @@
 <script src="https://midasism.github.io/media/js/view-image.min.js"></script>
 <script src="https://midasism.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://midasism.github.io/media/js/functions.js"></script>
+    <meta name="referrer" content="never">
+    <meta name="description" content="一、环境准备
+Spring配置文件 applicationContext.xml
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmln..." />
+    <meta name="keywords" content="Spring,Java" />
+    <script src="https://midasism.github.io/media/js/waterfall.min.js"></script>
+    <script src="https://midasism.github.io/media/js/prism.min.js"></script>
   </head>
   <body>
-    <!-- start: #wrapper -->
-    <div class="wrapper">
-      
             <header id="header" class="grid-container">
         <!-- start: .menu-wrapper -->
         <div class="menu-mobile"> 
@@ -85,45 +90,135 @@
         </div>
       </div>
 
-      <main id="home" class="main fullcover no-sidebar content">
-        <div class="grid-container module-wrapper enable-masonry aos-init aos-animate" data-aos="fade-up">
-        <div class="epcl-page-wrapper">
-          <div class="left-content grid-70 np-mobile widget_epcl_related_articles">
-                
-            <!-- start: .articles -->
-            <div class="main-article post">
-  <h2 class="year"># Gridea</h2>
-    
-      <article class="item default grid-33 tablet-grid-50 np-mobile">
-        <a href="https://midasism.github.io/post/hello-gridea/" class="thumb hover-effect">
-          <span class="fullimage cover" style="display: block;background-image: url('https://midasism.github.io/post-images/hello-gridea.png');"></span>
-        </a>
-        <div class="info gradient-effect">
-          <time datetime="2018-12-12">2018-12-12</time>
-          <h4 class="title usmall">
-            <a href="https://midasism.github.io/post/hello-gridea/">Hello Gridea</a>
-          </h4>
-        </div>
-      </article>
+      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
 
-    
-    <div class="clear"></div>
-</div>
-            <!-- end: .articles -->
-            
-                        <div class="epcl-pagination section">
-              <div class="nav">
-                
-                
-              </div>
+        <div class="center content">
+          <div class="featured-image cover" style="background-image: url('/media/images/gridea.jpg');">
+            <div class="meta top"> 
+              <time class="meta-info" style="float:left;" datetime="2021-01-27"><i class="fa fa-calendar"></i><span class="lately">5 天前</span></time>
+              
+              <a href="https://midasism.github.io/post/ioc-xml/#comments" class="comments meta-info" title="">
+                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/ioc-xml/"> </span>
+              </a>
+              <span id="/ioc-xml/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
+              
             </div>
+            <div class="info">
+              <div class="tags ">
+                
+                      <a href="https://midasism.github.io/tag/P5eyWDGee/" class="ctag ctag-0 ctag-P5eyWDGee" aria-label="">Spring</a>
+                    
+                      <a href="https://midasism.github.io/tag/dT7Z0q2LF/" class="ctag ctag-1 ctag-dT7Z0q2LF" aria-label="">Java</a>
+                    
+              </div>
+              <h1 class="title ularge white bold">基于注解配置Bean</h1>
+            </div>
+          </div>
+        </div>  
+
+        <div class="epcl-page-wrapper">
+          <div class="left-content grid-70 np-mobile">
+            <article class="main-article post">
+              <section class="post-content">
+                <div class="text">
+                  <h3 id="一-环境准备">一、环境准备</h3>
+<p>Spring配置文件 <strong>applicationContext.xml</strong></p>
+<pre><code class="language-xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:context=&quot;http://www.springframework.org/schema/c&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd&quot;&gt;
+
+&lt;!-- 开启自动扫描 --&gt;
+    &lt;context:component-scan base-package=&quot;待扫描的包&quot;/&gt;
+
+&lt;/beans&gt;
+</code></pre>
+<h3 id="二-相关注解">二、相关注解</h3>
+<ol>
+<li>@Repository：标记数据访问层（dao）</li>
+<li>@Controller：标记控制器层（controller）</li>
+<li>@Service：标记业务层（service）</li>
+<li>@Component：标记通用组件</li>
+</ol>
+<h4 id="要点">要点</h4>
+<ul>
+<li>如果使用默认注解，则类对应的bean的id为开头字母小写的类名</li>
+<li>如果想要自定义bean的id，则对注解的value属性赋值即可</li>
+</ul>
+<pre><code class="language-java">//无参 bean id为student
+@Controller()
+public class Student {
+    private String name;
+    private String id;
+}
+
+//bean id为 s1
+//@Controller(&quot;s1&quot;)
+@Controller(value = &quot;s1&quot;)
+public class Student {
+    private String name;
+    private String id;
+}
+</code></pre>
+<ul>
+<li>在类上使用以上四个注解后，Spring会自动创建相应的BeanDefinition对象，并注册到ApplicationContext中</li>
+<li>可以创建自定义注解，然后在注解上标注@Component，该自定义注解就具有了@Component的功能</li>
+<li>以上4个注解功能相同，只是作用位置不同，增强可读性</li>
+</ul>
+
+                </div>
+                <div class="clear"></div>
+              </section>
+            </article>
+            <div class="clear"></div>
+
+            <section class="related section">
+              
+              <article class="prev grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://midasism.github.io/media/images/P5eyWDGee.jpg');"></div>
+                 <a href="https://midasism.github.io/post/ioc-JavaConfig/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-01-28">2021-01-28</time>
+                  <h4 class="title white no-margin">Java Config 配置IOC容器</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://midasism.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+              
+              <article class="next grid-50 tablet-grid-50 grid-parent">
+                <div class="thumb cover lazy loaded" style="background-image: url('https://midasism.github.io/media/images/P5eyWDGee.jpg');"></div>
+                 <a href="https://midasism.github.io/post/ioc-demo/" class="full-link"></a>
+                 <div class="info">
+                  <time datetime="2021-01-27">2021-01-27</time>
+                  <h4 class="title white no-margin">实现一个极简IOC容器</h4>
+                </div>
+                 <span class="epcl-button red">
+                  <img src="https://midasism.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
+                </span>
+                <div class="overlay"></div>
+              </article>
+              
+
+                <div class="clear"></div>
+            </section>
+
+              <div class="clear"></div>
+              
             
+              <div id="comments" class="bg-white hosted ">
+                <p>请到客户端“主题--自定义配置--valine”中填入ID和KEY</p>
+              </div>
+              <div class="clear"></div>
+            
+
+            </div>
           </div>
-          </div>
-        </div>
       </main>
 
-        <footer id="footer" class="grid-container">
+          <footer id="footer" class="grid-container">
         <div class="widgets row gradient-effect">
             <div class="default-sidebar border-effect">
               <div class="grid-33 tablet-grid-50 mobile-grid-100">
@@ -253,6 +348,9 @@
     <div class="clear"></div>
 
         
+
+      
+    <script src="https://midasism.github.io/media/js/functions-post.js"></script>
 
     </div>
     <!-- end: #wrapper -->
