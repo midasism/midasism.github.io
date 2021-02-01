@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://midasism.github.io</id>
     <title>Gridea</title>
-    <updated>2021-02-01T08:38:51.836Z</updated>
+    <updated>2021-02-01T13:08:04.306Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://midasism.github.io"/>
     <link rel="self" href="https://midasism.github.io/atom.xml"/>
@@ -648,6 +648,66 @@ public class SpringApplication {
 </br>
 <h3 id="24-运行结果">2.4、运行结果</h3>
 <figure data-type="image" tabindex="1"><img src="https://midasism.github.io/post-images/1612149890444.png" alt="" loading="lazy"></figure>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[aop通知类型]]></title>
+        <id>https://midasism.github.io/post/dai-wan-cheng-aop-tong-zhi-lei-xing/</id>
+        <link href="https://midasism.github.io/post/dai-wan-cheng-aop-tong-zhi-lei-xing/">
+        </link>
+        <updated>2021-01-30T08:20:53.000Z</updated>
+        <content type="html"><![CDATA[<h2 id="1-五种通知类型">1、五种通知类型</h2>
+<h3 id="11-前置通知-before">1.1、前置通知 before</h3>
+<ul>
+<li>在目标方法执行前执行的通知</li>
+<li>切面方法可以没有参数，也可以增加一个JoinPoint对象参数，Spring会自动将该对象传入</li>
+<li>如果JoinPoint对象参数没有放在第一个，将会报错<br>
+| Caused by: java.lang.IllegalArgumentException: error at ::0 formal unbound in pointcut</li>
+</ul>
+</br>
+<h3 id="12-后置通知-after">1.2、后置通知 after</h3>
+<ul>
+<li>在目标方法执行后执行的通知<br>
+| 相当于try-catch语句中的finally块，<strong>不管是否有异常，最终都会被执行</strong></li>
+<li>同样可以增加JoinPoint对象参数</li>
+</ul>
+</br>
+<h3 id="13-返回后通知-after-returning">1.3、返回后通知 after-returning</h3>
+<ul>
+<li>目标方法<strong>成功执行</strong>后执行的通知</li>
+<li>除了可以增加JoinPoint对象参数，还可以增加一个参数接受返回值，用于接收目标方法的返回值<br>
+| 需要在配置文件中配置returning值为接受返回值的参数名</li>
+</ul>
+<pre><code class="language-xml">&lt;aop:after-returning method=&quot;&quot; pointcut-ref=&quot;&quot; returning=&quot;接受返回值的参数名&quot;/&gt;
+</code></pre>
+<p>详见<a href="https://midasism.github.io/post/aop-xml/">《XML文件 配置AOP》</a><br>
+</br></p>
+<h3 id="14-异常通知-after-throwing">1.4、异常通知 after-throwing</h3>
+<ul>
+<li>目标方法抛出异常后执行的通知</li>
+<li>除了可以增加JoinPoint对象参数，还可以增加Throwable对象参数，用于接收目标方法产生的异常<br>
+| 需要在配置文件中配置throwing值为Throwable对象参数名</li>
+</ul>
+<pre><code class="language-xml">&lt;aop:after-throwing method=&quot;&quot; pointcut-ref=&quot;&quot; throwing=&quot;&quot;/&gt;
+</code></pre>
+<p>详见<a href="https://midasism.github.io/post/aop-xml/">《XML文件 配置AOP》</a><br>
+</br></p>
+<h3 id="15-环绕通知-around">1.5、环绕通知 around</h3>
+<ul>
+<li>在目标方法执行前后都可以执行的通知（功能最强大）</li>
+<li>如果想要目标方法执行，需要接收<strong>ProceedingJoinPoint</strong>对象参数，并使用<strong>proceed</strong>方法调用目标方法<br>
+| 使用proceed方法必须抛出Throwable异常或者使用try-catch语句<br>
+| 如果没有抛出Throwable异常，异常通知无法执行<br>
+|  proceed方法的返回值就是目标方法的返回值<br>
+|  如果在切面方法中不把proceed方法的返回值返回，则最终无法获取目标方法的返回值</li>
+</ul>
+<p></br></br></p>
+<h2 id="2-小tips">2、小tips</h2>
+<ul>
+<li>如果没有环绕通知，后置通知和返回后通知执行顺序由配置文件中的顺序决定</li>
+<li>异常通知和后置通知执行顺序由配置文件中的顺序决定</li>
+<li>返回后通知与异常通知互斥执行</li>
+</ul>
 ]]></content>
     </entry>
     <entry>
