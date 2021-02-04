@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Spring Test与JUnit4整合 | Gridea</title>
+<title>Gridea</title>
 <meta name="description" content="凡事到最后必将皆大欢喜，如果没有，那就是还没到最后" />
 <link rel="shortcut icon" href="https://midasism.github.io/favicon.ico">
 <link rel="stylesheet" href="https://midasism.github.io/styles/main.css">
@@ -14,20 +14,11 @@
 <script src="https://midasism.github.io/media/js/view-image.min.js"></script>
 <script src="https://midasism.github.io/media/js/jquery.magnific-popup.min.js"></script>
 <script src="https://midasism.github.io/media/js/functions.js"></script>
-    <meta name="referrer" content="never">
-    <meta name="description" content="
-Spring Test是Spring中用于测试的模块
-Spring Test对JUnit单元测试框架有良好的整合
-通过Spring Test可以在JUnit单元测试时自动初始化IOC容器
-
-1、环境准备
-1.1、相关依赖
-&lt;depe..." />
-    <meta name="keywords" content="Spring,Java" />
-    <script src="https://midasism.github.io/media/js/waterfall.min.js"></script>
-    <script src="https://midasism.github.io/media/js/prism.min.js"></script>
   </head>
   <body>
+    <!-- start: #wrapper -->
+    <div class="wrapper">
+      
             <header id="header" class="grid-container">
         <!-- start: .menu-wrapper -->
         <div class="menu-mobile"> 
@@ -94,142 +85,87 @@ Spring Test对JUnit单元测试框架有良好的整合
         </div>
       </div>
 
-      <main id="single" class="main grid-container fullcover no-sidebar aos-init aos-animate" data-aos="fade">
-
-        <div class="center content">
-          <div class="featured-image cover" style="background-image: url('https://midasism.github.io/post-images/springTest-JUnit4.png');">
-            <div class="meta top"> 
-              <time class="meta-info" style="float:left;" datetime="2021-01-29"><i class="fa fa-calendar"></i><span class="lately">6 天前</span></time>
-              
-              <a href="https://midasism.github.io/post/springTest-JUnit4/#comments" class="comments meta-info" title="">
-                <i class="fa fa-comment remixicon"></i><span class="comment-count valine-comment-count" data-xid="/springTest-JUnit4/"> </span>
-              </a>
-              <span id="/springTest-JUnit4/" class="leancloud_visitors views-counter meta-info" title=""><i class="fa fa-leancloud remixicon"></i><span class="leancloud-visitors-count"></span></span>
-              
-            </div>
-            <div class="info">
-              <div class="tags ">
+      <main id="home" class="main">
+        <div class="grid-container module-wrapper enable-masonry aos-init aos-animate" data-aos="fade-up">
+        <div class="row">
+          <div class="content-wrapper grid-posts content">
                 
-                      <a href="https://midasism.github.io/tag/P5eyWDGee/" class="ctag ctag-0 ctag-P5eyWDGee" aria-label="">Spring</a>
-                    
-                      <a href="https://midasism.github.io/tag/dT7Z0q2LF/" class="ctag ctag-1 ctag-dT7Z0q2LF" aria-label="">Java</a>
-                    
-              </div>
-              <h1 class="title ularge white bold">Spring Test与JUnit4整合</h1>
-            </div>
-          </div>
-        </div>  
-
-        <div class="epcl-page-wrapper">
-          <div class="left-content grid-70 np-mobile">
-            <article class="main-article post">
-              <section class="post-content">
-                <div class="text">
-                  <ul>
-<li>Spring Test是Spring中用于测试的模块</li>
-<li>Spring Test对JUnit单元测试框架有良好的整合</li>
-<li>通过Spring Test可以在JUnit单元测试时自动初始化IOC容器</li>
-</ul>
-<h2 id="1-环境准备">1、环境准备</h2>
-<h3 id="11-相关依赖">1.1、相关依赖</h3>
-<pre><code class="language-xml">&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
-    &lt;version&gt;5.2.12.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
-&lt;!--        Spring Test--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;org.springframework&lt;/groupId&gt;
-    &lt;artifactId&gt;spring-test&lt;/artifactId&gt;
-    &lt;version&gt;5.2.9.RELEASE&lt;/version&gt;
-&lt;/dependency&gt;
-
-&lt;!--        Junit--&gt;
-&lt;dependency&gt;
-    &lt;groupId&gt;junit&lt;/groupId&gt;
-    &lt;artifactId&gt;junit&lt;/artifactId&gt;
-    &lt;version&gt;4.12&lt;/version&gt;
-&lt;/dependency&gt;
-</code></pre>
-<h3 id="12-相关注解">1.2、相关注解</h3>
-<ol>
-<li>@RunWith(SpringJUnit4ClassRunner.class)：使Spring接管JUnit的控制权，在测试用例执行前自动初始化IOC容器</li>
-<li>@ContextConfiguration(locations = {})：说明要加载的xml配置文件的位置（可加载多个配置文件）</li>
-</ol>
-<h2 id="2-实战">2、实战</h2>
-<pre><code class="language-java">//Test.java
-import org.junit.runner.RunWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import spring.service.StudentService;
-import javax.annotation.Resource;
-
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {&quot;classpath:applicationContext.xml&quot;})
-public class Test {
-    @Resource
-    private StudentService service;
-
-    @org.junit.Test
-    public void testService() {
-        service.test();
-    }
-}
-</code></pre>
-
-                </div>
-                <div class="clear"></div>
-              </section>
-            </article>
-            <div class="clear"></div>
-
-            <section class="related section">
-              
-              <article class="prev grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://midasism.github.io/media/images/gridea.jpg');"></div>
-                 <a href="https://midasism.github.io/post/xml-wen-jian-pei-zhi-bean/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2021-01-29">2021-01-29</time>
-                  <h4 class="title white no-margin">XML文件配置IOC容器</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://midasism.github.io/media/images/left-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
-              
-              <article class="next grid-50 tablet-grid-50 grid-parent">
-                <div class="thumb cover lazy loaded" style="background-image: url('https://midasism.github.io/media/images/P5eyWDGee.jpg');"></div>
-                 <a href="https://midasism.github.io/post/ioc-JavaConfig/" class="full-link"></a>
-                 <div class="info">
-                  <time datetime="2021-01-28">2021-01-28</time>
-                  <h4 class="title white no-margin">Java Config 配置IOC容器</h4>
-                </div>
-                 <span class="epcl-button red">
-                  <img src="https://midasism.github.io/media/images/right-arrow.svg" width="15" alt="Left Arrow">
-                </span>
-                <div class="overlay"></div>
-              </article>
-              
-
-                <div class="clear"></div>
-            </section>
-
-              <div class="clear"></div>
-              
+            <!-- start: .articles -->
             
-              <div id="comments" class="bg-white hosted ">
-                <p>请到客户端“主题--自定义配置--valine”中填入ID和KEY</p>
-              </div>
-              <div class="clear"></div>
-            
+              
+              
+              <div class="articles columns-3">
+                
+              <article class="default grid-33 tablet-grid-50 mobile-grid-100 np-mobile post type-post status-publish format-standard has-post-thumbnail hentry">
+                <div class="article-wrapper">
+                  <header>
+                    <div class="post-format-image post-format-wrapper">
+                      <div class="featured-image">
+                        <a href="https://midasism.github.io/post/hello-gridea/" class="thumb hover-effect">
+                          <span class="fullimage cover" role="img" aria-label="" style="background-image: url('https://midasism.github.io/post-images/hello-gridea.png');"></span>
+                        </a>
+                        
+                        <div class="tags absolute">
+                          <a href="https://midasism.github.io/tag/QmxroM8CJ/" class="ctag ctag-0 ctag-QmxroM8CJ">Gridea</a>
+                        </div>
+                        
+                      </div>
+                    </div>                    
+                    <div class="meta">
+                      <time datetime="2018-12-12"><i class="fa fa-calendar"></i><span class="lately">2 年前</span></time>
+                      <div class="clear"></div>
+                    </div>
 
+                    <h1 class="title main-title gradient-effect"><a href="https://midasism.github.io/post/hello-gridea/">Hello Gridea</a></h1>
+                  </header>
+
+                  <div class="post-excerpt">
+                      <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+
+                    <div class="clear"></div>
+                  </div>
+
+                  <footer class="author-meta">
+                    <a href="" class="author" title="">
+                      <span class="author-image cover" style="background-image: url('https://midasism.github.io/images/avatar.png');"></span>
+                      <span class="author-name">Gridea</span>
+                    </a>
+                    
+                    <a href="https://midasism.github.io/post/hello-gridea/#comments" class="comments meta-info alignright" title="">
+                      <span class="comment-count valine-comment-count" data-xid="/hello-gridea/"> </span><i class="fa fa-comment"></i>
+                    </a>
+                    <div id="/hello-gridea/" class="leancloud_visitors views-counter meta-info alignright" title=""><span class="leancloud-visitors-count" style="vertical-align: middle;"></span><i class="fa fa-leancloud"></i></div>
+                    
+                    <div class="clear"></div>
+                  </footer>
+                  <div class="border"></div>       
+                </div>
+              </article>
+                
+              
+              
+              <div class="clear"></div>
+              <div class="separator last hide-on-tablet hide-on-mobile"></div>
             </div>
+            <!-- end: .articles -->
+            
+                        <div class="epcl-pagination section">
+              <div class="nav">
+                
+                  <a href="https://midasism.github.io/" class="prev button red">上一页</a>
+                
+                
+              </div>
+            </div>
+
+            
           </div>
+          </div>
+        </div>
       </main>
 
-          <footer id="footer" class="grid-container">
+        <footer id="footer" class="grid-container">
         <div class="widgets row gradient-effect">
             <div class="default-sidebar border-effect">
               <div class="grid-33 tablet-grid-50 mobile-grid-100">
@@ -365,9 +301,6 @@ public class Test {
     <div class="clear"></div>
 
         
-
-      
-    <script src="https://midasism.github.io/media/js/functions-post.js"></script>
 
     </div>
     <!-- end: #wrapper -->
